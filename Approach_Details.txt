@@ -1,0 +1,39 @@
+Data Preparation and EDA:
+1. Read the Input data from the csv file(i.e. train.csv)
+2. Did basic checks like checking the shape, info details and overall statical view of the data  
+3. Notice some NULL values for the columns Item_Weight and Outlet_Size
+4. Initially, handled it using Mean/Median/Mode imputation and visualized it using distribution plot.
+5. Data is been skewed and one particular value spike has been created.
+6. I have used the sampling technique to handle the NULL value.
+7. I have used 'sample Imputation technique' where the SD is not changed much and the distribution of the variable is not impacted.
+8. Since 'Outlet_Size' is categorical data. So I have tried to apply 'Count/ frequency' encoding.
+9. As per the analysis most of the outlet size is medium. So If we handle the NA value using 'Count/ frequency' the data will get skewed or biased to one feature.
+10. I noticed, missing data is only for the outlet present in 'Tier 3 and Tier 2' locations. so, Also, for all the outlet present in Tier 2 location are small and around 20% of missing values belongs to tier 2 only and Tier 3 is falling under medium or High. In order to balance will replace the tier 3 records with High and Tier 2 data with 'Small'
+
+Featuring Engineering and Feature Scaling:
+1. We have around 10 outlets and noticed there is no interval or year gaps in opening all these outlet and based on the data give it shown all the shop opening has been happened based on other market field analysis not based on the year interval or every year one show is been opened. since there is not pattern. Dropping this 'Outlet_Establishment_Year' feature.
+2. We can see mostly for all the products visibility is given between 0-5 and 5-10 pec area.
+3. Item Identifier Column Handling: I notice Item_Identifier has Product Code followed by ID. So Instead of making label encode on all the values. I have splitter the code and ID into two column and will do label encoding on the code column only.
+4. Applied Label encoding foe all the categorical features : 'Item_Fat_Content','Item_Type','Outlet_Size','Outlet_Location_Type','Outlet_Type','Item_Identifier_Code'
+5. Stored all the label encoding object to use it for test data in future.
+6. For the Numerical data: Item_Visibility is Right skewed and remaining two column data has been dispersed by there is some distortion in the center.
+7. Noticed Outliers for the 'Item Visibility' column. So, I have handled the outlier using IQR technique and used the same for test data as well.
+8. When I checked the correlation for the Numerical variable with the output field. I notice, Item visibility has very low corellation with the Output variable. So dropping 
+that Feature.
+9. Applied Random Forest and noticed some features are contributing much in the prediction which I have used 'Feature Importance' So dropping those features as well.
+9. Dropped all the unimportant features- Item_Visibility,Item_Fat_Content,Outlet_Size,Outlet_Location_Type.
+9. Applied Standard scaling for the Input feature and stored the object for testing data.
+
+Model Building and Training/Prediction:
+1. Initally used RF,Gradiend Boosting, XGBoost and Catboost for prediction. The accuracy is low.
+2. Later I have used the GridsearchCV and removed the unimportant features which I have mentioned above.
+3. Did Cross validation as well and picked the best parameters using the GridsearchCV method for XGBoost and catboost algorithams.
+4. Accuracy is been increased for both the model and I notice catboost accuracy is good when compare to all the other models.
+5. It give me of around RMSE(1050.3979) and R2 square(0.60).
+6. I have stored all model of Catboost and XGBoost into a pickle file for testing data.
+7. Read the test file and did the data preprocessing and Feature Engineering with the functions created in the testing code.
+8. Consumed the stored pickle file like Label encoded file, Scaler file and final model file which is been used for prediction.
+9. Using the model file prediction is done, using XGBoost and Catbooast algorithms and stored the file in 'Submission_XB_final.csv' and 'Submission_CBR_final.csv' for your reference.
+
+
+
