@@ -1,6 +1,6 @@
 Data Preparation and EDA:
 1. Read the Input data from the csv file(i.e. train.csv)
-2. Did basic checks like checking the shape, info details and overall statical view of the data  
+2. Did basic checks like checking the shape, info details and overall statical view of the data.
 3. Notice some NULL values for the columns Item_Weight and Outlet_Size
 4. Initially, handled it using Mean/Median/Mode imputation and visualized it using distribution plot.
 5. Data is been skewed and one particular value spike has been created.
@@ -34,6 +34,7 @@ Model Building and Training/Prediction:
 7. Read the test file and did the data preprocessing and Feature Engineering with the functions created in the testing code.
 8. Consumed the stored pickle file like Label encoded file, Scaler file and final model file which is been used for prediction.
 9. Using the model file prediction is done, using XGBoost and Catbooast algorithms and stored the file in 'Submission_XB_final.csv' and 'Submission_CBR_final.csv' for your reference.
+
 
 
 
